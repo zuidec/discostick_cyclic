@@ -1,0 +1,8 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "trsf3222e")(type "KiCad")(uri "/home/zuidec/Documents/programming_docs/kicad_addons/libraries/trsf3222e/ul_TRSF3222ECDB/KiCADv6/footprints.pretty")(options "")(descr "")(disabled))
+  (lib (name "trsf3232e")(type "KiCad")(uri "/home/zuidec/Documents/programming_docs/kicad_addons/libraries/trsf3232e/ul_TRSF3232ECD/KiCADv6/footprints.pretty")(options "")(descr ""))
+  (lib (name "rt9167-33gb")(type "KiCad")(uri "/home/zuidec/Documents/programming_docs/kicad_addons/libraries/RT9167A-33GB/KiCADv6/footprints.pretty")(options "")(descr ""))
+  (lib (name "tlsmdt3c020glfs")(type "KiCad")(uri "/home/zuidec/Documents/programming_docs/kicad_addons/libraries/TLSMDT3C020GLFS/KiCADv6/footprints.pretty")(options "")(descr ""))
+  (lib (name "PTS847MM160LSMTR2_LFS")(type "KiCad")(uri "/home/zuidec/Documents/programming_docs/kicad_addons/libraries/PTS847MM160LSMTR2_LFS")(options "")(descr ""))
+)

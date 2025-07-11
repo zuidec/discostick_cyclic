@@ -1,0 +1,1 @@
+/home/zuidec/programming/stmcube/discostick_common/Core/Inc/uart.h

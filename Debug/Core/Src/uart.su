@@ -1,0 +1,10 @@
+../Core/Src/uart.c:21:15:uart_init	16	static
+../Core/Src/uart.c:46:9:uart_register_instance	24	static
+../Core/Src/uart.c:58:6:uart_unregister_instance	16	static
+../Core/Src/uart.c:62:15:uart_update	16	static
+../Core/Src/uart.c:111:10:uart_read	32	static
+../Core/Src/uart.c:121:10:uart_write	40	static
+../Core/Src/uart.c:166:10:uart_write_packet	24	static
+../Core/Src/uart.c:186:16:get_uart_handle	24	static
+../Core/Src/uart.c:211:6:HAL_UARTEx_RxEventCallback	32	static
+../Core/Src/uart.c:257:6:HAL_UART_TxCpltCallback	24	static

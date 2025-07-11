@@ -1,0 +1,6 @@
+../Core/Src/com_packet.c:8:6:com_packet_init	16	static
+../Core/Src/com_packet.c:20:6:com_packet_clear_payload	16	static
+../Core/Src/com_packet.c:30:6:com_packet_create	40	static
+../Core/Src/com_packet.c:57:6:com_packet_create_special	16	static
+../Core/Src/com_packet.c:76:15:com_packet_parse	40	static
+../Core/Src/com_packet.c:145:10:bind_access	16	static

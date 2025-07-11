@@ -1,0 +1,14 @@
+../Core/Src/w25q16jv.c:10:13:cs_enable	16	static
+../Core/Src/w25q16jv.c:14:13:cs_release	16	static
+../Core/Src/w25q16jv.c:18:6:w25q16_read	32	static
+../Core/Src/w25q16jv.c:26:6:w25q16_write	32	static
+../Core/Src/w25q16jv.c:43:6:w25q16_enable_write	24	static
+../Core/Src/w25q16jv.c:50:6:w25q16_disable_write	24	static
+../Core/Src/w25q16jv.c:57:6:w25q16_sector_erase_4k	24	static
+../Core/Src/w25q16jv.c:67:6:w25q16_block_erase_32k	16	static
+../Core/Src/w25q16jv.c:71:6:w25q16_block_erase_64k	16	static
+../Core/Src/w25q16jv.c:75:9:w25q16_read_SR1	24	static
+../Core/Src/w25q16jv.c:86:9:w25q16_read_SR2	24	static
+../Core/Src/w25q16jv.c:97:9:w25q16_read_SR3	24	static
+../Core/Src/w25q16jv.c:108:10:w25q16_get_id	168	static
+../Core/Src/w25q16jv.c:118:10:w25q16_get_jedec_id	24	static
