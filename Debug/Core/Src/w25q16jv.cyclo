@@ -11,4 +11,5 @@
 ../Core/Src/w25q16jv.c:86:9:w25q16_read_SR2	1
 ../Core/Src/w25q16jv.c:97:9:w25q16_read_SR3	1
 ../Core/Src/w25q16jv.c:108:10:w25q16_get_id	1
-../Core/Src/w25q16jv.c:118:10:w25q16_get_jedec_id	1
+../Core/Src/w25q16jv.c:118:6:w25q16_reset	1
+../Core/Src/w25q16jv.c:128:10:w25q16_get_jedec_id	1

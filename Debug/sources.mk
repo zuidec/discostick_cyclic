@@ -26,8 +26,9 @@ Core/HID_Backup \
 Core/Src \
 Core/Startup \
 Drivers/STM32F4xx_HAL_Driver/Src \
-Middlewares/ST/STM32_USB_Device_Library/Class/CustomHID/Src \
-Middlewares/ST/STM32_USB_Device_Library/Core/Src \
-USB_DEVICE/App \
-USB_DEVICE/Target \
+Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/App \
+Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/COMPOSITE/Src \
+Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/HID_CUSTOM/Src \
+Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Core/Src \
+Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Target \
 
