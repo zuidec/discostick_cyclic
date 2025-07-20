@@ -1,5 +1,5 @@
 kicad
-Debug
+Debug/
 *.d
 *.o
 *.launch

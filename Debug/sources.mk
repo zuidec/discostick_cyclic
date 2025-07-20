@@ -29,6 +29,7 @@ Drivers/STM32F4xx_HAL_Driver/Src \
 Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/App \
 Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/COMPOSITE/Src \
 Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/HID_CUSTOM/Src \
+Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/HID_CUSTOM2/Src \
 Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Core/Src \
 Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Target \
 

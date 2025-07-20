@@ -406,6 +406,12 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
     HAL_PCDEx_PMAConfig((PCD_HandleTypeDef *)pdev->pData, CUSTOM_HID_OUT_EP, PCD_SNG_BUF, pma_track);
     pma_track += 8;
 #endif
+#if (USBD_USE_HID_CUSTOM2 == 1)
+    HAL_PCDEx_PMAConfig((PCD_HandleTypeDef *)pdev->pData, CUSTOM_HID2_IN_EP, PCD_SNG_BUF, pma_track);
+    pma_track += 8;
+    HAL_PCDEx_PMAConfig((PCD_HandleTypeDef *)pdev->pData, CUSTOM_HID2_OUT_EP, PCD_SNG_BUF, pma_track);
+    pma_track += 8;
+#endif
 #if (USBD_USE_UAC_MIC == 1)
     HAL_PCDEx_PMAConfig((PCD_HandleTypeDef *)pdev->pData, AUDIO_MIC_EP, PCD_SNG_BUF, pma_track);
     pma_track += 128;
@@ -468,6 +474,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
 #endif
 #if (USBD_USE_HID_CUSTOM == 1)
     HAL_PCDEx_SetTxFiFoInBytes(hpcd_USB_OTG_PTR, (CUSTOM_HID_IN_EP & 0x7F), 64);
+#endif
+#if (USBD_USE_HID_CUSTOM2 == 1)
+    HAL_PCDEx_SetTxFiFoInBytes(hpcd_USB_OTG_PTR, (CUSTOM_HID2_IN_EP & 0x7F), 64);
 #endif
 #if (USBD_USE_UAC_MIC == 1)
     HAL_PCDEx_SetTxFiFoInBytes(hpcd_USB_OTG_PTR, (AUDIO_MIC_EP & 0x7F), 128);

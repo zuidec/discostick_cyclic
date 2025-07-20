@@ -163,8 +163,8 @@ int main(void)
 
   uint64_t usb_timer = HAL_GetTick();
   uint64_t uart_timer = HAL_GetTick();
-  uint32_t usb_interval_ms = 10;
-  uint32_t packet_count =0;
+  uint32_t usb_interval_ms = 5;
+  uint32_t packet_count =0x00;
 
   bool ack_received = false;
   uint32_t retx_count = 0;
@@ -190,16 +190,12 @@ int main(void)
 		  stepper_enable(&pitch_motor);
 		  stepper_enable(&roll_motor);
 	  }
-	 // uint8_t temp_buffer[5] = {cyclic_report.buttons,cyclic_report.roll, cyclic_report.roll >> 8,cyclic_report.pitch, cyclic_report.pitch >> 8};
-	 uint8_t temp_buffer[17] = {0};
-	 temp_buffer[0] = 0xDE;
-	 temp_buffer[1] = cyclic_report.roll;
-	 temp_buffer[2] = cyclic_report.roll >> 8;
-	 temp_buffer[3] = cyclic_report.pitch;
-	 temp_buffer[4] = cyclic_report.pitch >> 8;
-	 temp_buffer[5] = 0xAD;
+	  uint8_t temp_buffer[5] = {cyclic_report.buttons,cyclic_report.roll, cyclic_report.roll >> 8,cyclic_report.pitch, cyclic_report.pitch >> 8};
+	  uint8_t otherbuffer[6] = {0};
+
 	  if(HAL_GetTick()-usb_timer >= usb_interval_ms )	{
 		  USBD_CUSTOM_HID_SendReport(&hUsbDevice, temp_buffer, sizeof(temp_buffer));
+		  USBD_CUSTOM_HID2_SendReport(&hUsbDevice, otherbuffer, sizeof(otherbuffer));
 		  //USBD_CUSTOM_HID_SendReport(&hUsbDevice, (uint8_t *)&cyclic_report, cyclic_report.size);
           usb_timer = HAL_GetTick();
 	  }

@@ -11,6 +11,7 @@ RM := rm -rf
 -include sources.mk
 -include Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Target/subdir.mk
 -include Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Core/Src/subdir.mk
+-include Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/HID_CUSTOM2/Src/subdir.mk
 -include Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/HID_CUSTOM/Src/subdir.mk
 -include Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Class/COMPOSITE/Src/subdir.mk
 -include Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/App/subdir.mk

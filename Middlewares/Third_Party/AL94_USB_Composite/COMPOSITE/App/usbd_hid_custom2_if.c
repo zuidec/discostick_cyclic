@@ -48,7 +48,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_hid_custom_if.h"
+#include "usbd_hid_custom2_if.h"
 
 /* USER CODE BEGIN INCLUDE */
 
@@ -60,7 +60,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-uint8_t buffer[0x40];
+uint8_t buffer2[0x40];
 /* USER CODE END PV */
 
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
@@ -117,35 +117,31 @@ uint8_t buffer[0x40];
   */
 
 /** Usb HID report descriptor. */
-__ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc[USBD_CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
+__ALIGN_BEGIN static uint8_t CUSTOM_HID2_ReportDesc[USBD_CUSTOM_HID2_REPORT_DESC_SIZE] __ALIGN_END =
     {
         /* USER CODE BEGIN 0 */
 	0x05, 0x01,        /* Usage Page (Generic Desktop Ctrls)     */
 	0x09, 0x04,        /* Usage (Joystick)                       */
 	0xA1, 0x01,        /* Collection (Application)               */
-		  0xA1, 0x00,        	/*   Collection (Physical)              */
-		  	  0x85, 0x01,		 	/*   ReportID (1)						 */
-			  0x05, 0x09,        /*     Usage Page (Button)                */
-			  0x19, 0x01,        /*     Usage Minimum (0x01)               */
-			  0x29, 0x08,        /*     Usage Maximum (0x08)               */
-			  0x15, 0x00,        /*     Logical Minimum (0)                */
-			  0x25, 0x01,        /*     Logical Maximum (1)                */
-			  0x95, 0x08,        /*     Report Count (8)                   */
-			  0x75, 0x01,        /*     Report Size (1)                    */
-			  0x81, 0x02,        /*     Input (Data,Var,Abs)               */
-
+		  0xA1, 0x00,        /*   Collection (Physical)              */
+		  	  0x85, 0x02,		 	/*   ReportID (2)						 */
 			  0x05, 0x01,        /*     Usage Page (Generic Desktop Ctrls) */
-			  0x09, 0x30,        /*     Usage (X)                          */
-			  0x09, 0x31,        /*     Usage (Y)                          */
+			  0x09, 0x32,        /*     Usage (Z)                          */
 			  0x16, 0x01, 0xFC,  /*     Logical Minimum (-1023)            */
 			  0x26, 0xFF, 0x03,  /*     Logical Maximum (1023)             */
-			  //0x36, 0x01, 0xFC,	 /* 	Physical Minimum (-1023)		       */
-			  //0x46, 0xFF, 0x03,	 /*		Physical Maximum (1023)			   */
+			  0x75, 0x10,        /*     Report Size (16)                   */
+			  0x95, 0x01,        /*     Report Count (1)                   */
+			  0x81, 0x02,        /*     Input (Data,Var, Abs)               */
+
+              0x09, 0x33,        /*     Usage (Rx)                          */
+              0x09, 0x34,        /*     Usage (Ry)                          */
+			  0x16, 0x00, 0x00,  /*     Logical Minimum (0)                 */
+			  0x26, 0xFF, 0x07,  /*     Logical Maximum (2047)             */
 			  0x75, 0x10,        /*     Report Size (16)                   */
 			  0x95, 0x02,        /*     Report Count (2)                   */
 			  0x81, 0x02,        /*     Input (Data,Var, Abs)               */
 		  0xC0,    /*     END_COLLECTION	             */
-          // 46 bytes
+          // 44 bytes
         /* USER CODE END 0 */
         0xC0 /*     END_COLLECTION	             */
 };
@@ -232,18 +228,18 @@ extern USBD_HandleTypeDef hUsbDevice;
   * @{
   */
 
-static int8_t CUSTOM_HID_Init(void);
-static int8_t CUSTOM_HID_DeInit(void);
-static int8_t CUSTOM_HID_OutEvent(uint8_t event_idx, uint8_t state);
+static int8_t CUSTOM_HID2_Init(void);
+static int8_t CUSTOM_HID2_DeInit(void);
+static int8_t CUSTOM_HID2_OutEvent(uint8_t event_idx, uint8_t state);
 
 /**
   * @}
   */
 
-USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_fops = {CUSTOM_HID_ReportDesc,
-                                                  CUSTOM_HID_Init,
-                                                  CUSTOM_HID_DeInit,
-                                                  CUSTOM_HID_OutEvent};
+USBD_CUSTOM_HID2_ItfTypeDef USBD_CustomHID2_fops = {CUSTOM_HID2_ReportDesc,
+                                                  CUSTOM_HID2_Init,
+                                                  CUSTOM_HID2_DeInit,
+                                                  CUSTOM_HID2_OutEvent};
 
 /** @defgroup USBD_CUSTOM_HID_Private_Functions USBD_CUSTOM_HID_Private_Functions
   * @brief Private functions.
@@ -256,7 +252,7 @@ USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_fops = {CUSTOM_HID_ReportDesc,
   * @brief  Initializes the CUSTOM HID media low layer
   * @retval USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CUSTOM_HID_Init(void)
+static int8_t CUSTOM_HID2_Init(void)
 {
   /* USER CODE BEGIN 4 */
   return (USBD_OK);
@@ -267,7 +263,7 @@ static int8_t CUSTOM_HID_Init(void)
   * @brief  DeInitializes the CUSTOM HID media low layer
   * @retval USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CUSTOM_HID_DeInit(void)
+static int8_t CUSTOM_HID2_DeInit(void)
 {
   /* USER CODE BEGIN 5 */
   return (USBD_OK);
@@ -280,7 +276,7 @@ static int8_t CUSTOM_HID_DeInit(void)
   * @param  state: Event state
   * @retval USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CUSTOM_HID_OutEvent(uint8_t event_idx, uint8_t state)
+static int8_t CUSTOM_HID2_OutEvent(uint8_t event_idx, uint8_t state)
 {
   /* USER CODE BEGIN 6 */
   //memcpy(buffer, state, 0x40);
