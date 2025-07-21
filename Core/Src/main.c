@@ -190,12 +190,16 @@ int main(void)
 		  stepper_enable(&pitch_motor);
 		  stepper_enable(&roll_motor);
 	  }
-	  uint8_t temp_buffer[5] = {cyclic_report.buttons,cyclic_report.roll, cyclic_report.roll >> 8,cyclic_report.pitch, cyclic_report.pitch >> 8};
-	  uint8_t otherbuffer[6] = {0};
+
 
 	  if(HAL_GetTick()-usb_timer >= usb_interval_ms )	{
-		  USBD_CUSTOM_HID_SendReport(&hUsbDevice, temp_buffer, sizeof(temp_buffer));
-		  USBD_CUSTOM_HID2_SendReport(&hUsbDevice, otherbuffer, sizeof(otherbuffer));
+		  uint8_t temp_buffer[6] = {0x01, cyclic_report.buttons,cyclic_report.roll, cyclic_report.roll >> 8,cyclic_report.pitch, cyclic_report.pitch >> 8};
+		  uint8_t otherbuffer[7] = {0x02,0xDE,0xAD,0xC0,0xDE,0xDE,0xAD};
+		 uint8_t status =  USBD_CUSTOM_HID_SendReport(&hUsbDevice, temp_buffer, sizeof(temp_buffer));
+		 if(status == USBD_FAIL || status == USBD_BUSY)	{
+			 USBD_CUSTOM_HID_SendReport(&hUsbDevice, temp_buffer, sizeof(temp_buffer));
+		 }
+		 USBD_CUSTOM_HID2_SendReport(&hUsbDevice, otherbuffer, sizeof(otherbuffer));
 		  //USBD_CUSTOM_HID_SendReport(&hUsbDevice, (uint8_t *)&cyclic_report, cyclic_report.size);
           usb_timer = HAL_GetTick();
 	  }

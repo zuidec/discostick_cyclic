@@ -42,10 +42,10 @@ extern "C" {
   * @{
   */
 
-#define CUSTOM_HID2_STR_DESC                          "STM32 HID2 CUSTOM"
+#define CUSTOM_HID2_STR_DESC                          "STM32 HID2 CUSTOM2"
 
-#define CUSTOM_HID2_EPIN_SIZE                         0x02U
-#define CUSTOM_HID2_EPOUT_SIZE                        0x02U
+#define CUSTOM_HID2_EPIN_SIZE                         0x40U
+#define CUSTOM_HID2_EPOUT_SIZE                        0x40U
 
 #define USB_CUSTOM_HID2_CONFIG_DESC_SIZ               41U
 #define USB_CUSTOM_HID2_DESC_SIZ                      9U
@@ -59,7 +59,7 @@ extern "C" {
 #endif /* CUSTOM_HID_FS_BINTERVAL */
 
 #ifndef USBD_CUSTOMHID2_OUTREPORT_BUF_SIZE
-#define USBD_CUSTOMHID2_OUTREPORT_BUF_SIZE            0x02U
+#define USBD_CUSTOMHID2_OUTREPORT_BUF_SIZE            0x40U
 #endif /* USBD_CUSTOMHID_OUTREPORT_BUF_SIZE */
 
 #ifndef USBD_CUSTOM_HID2_REPORT_DESC_SIZE
