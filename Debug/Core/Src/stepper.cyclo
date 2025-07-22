@@ -1,6 +1,0 @@
-../Core/Src/stepper.c:11:6:stepper_enable	1
-../Core/Src/stepper.c:15:6:stepper_disable	1
-../Core/Src/stepper.c:19:6:stepper_set_dir	3
-../Core/Src/stepper.c:33:6:stepper_set_rpm	1
-../Core/Src/stepper.c:37:6:stepper_move	3
-../Core/Src/stepper.c:61:10:angle_to_steps	2

@@ -1,5 +1,0 @@
-../Core/Src/calibration.c:12:9:apply_calibration	4
-../Core/Src/calibration.c:32:6:set_calibration	2
-../Core/Src/calibration.c:47:6:get_calibration	2
-../Core/Src/calibration.c:63:6:clear_calibration	1
-../Core/Src/calibration.c:75:6:recalculate_calibration	3

@@ -1,8 +1,10 @@
-kicad
-Debug/
 *.d
 *.o
+*.cyclo
+*.su
 *.launch
 *.zip
 *.bin
 *.elf
+*.map
+*.list

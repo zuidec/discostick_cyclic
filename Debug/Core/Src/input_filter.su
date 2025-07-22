@@ -1,3 +1,0 @@
-../Core/Src/input_filter.c:11:6:input_filter_init	16	static
-../Core/Src/input_filter.c:16:6:input_filter_set_alpha	16	static
-../Core/Src/input_filter.c:26:7:input_filter_update	16	static
