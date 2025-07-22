@@ -42,7 +42,7 @@ extern "C" {
   * @{
   */
 
-#define CUSTOM_HID2_STR_DESC                          "STM32 HID2 CUSTOM2"
+#define CUSTOM_HID2_STR_DESC                          "DISCOSTICK PEDALS"
 
 #define CUSTOM_HID2_EPIN_SIZE                         0x40U
 #define CUSTOM_HID2_EPOUT_SIZE                        0x40U

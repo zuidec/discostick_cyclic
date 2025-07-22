@@ -41,6 +41,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/w25q16jv.h ../Core/Inc/stepper.h ../Core/Inc/calibration.h \
  ../Core/Inc/bitutils.h ../Core/Inc/uart.h ../Core/Inc/fifo.h \
  ../Core/Inc/com_packet.h ../Core/Inc/com_packet.h \
+ ../Core/Inc/special_hid_conf.h \
  ../Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/App/usb_device.h \
  ../Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Core/Inc/usbd_def.h \
  ../Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Target/usbd_conf.h
@@ -99,6 +100,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/fifo.h:
 ../Core/Inc/com_packet.h:
 ../Core/Inc/com_packet.h:
+../Core/Inc/special_hid_conf.h:
 ../Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/App/usb_device.h:
 ../Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Core/Inc/usbd_def.h:
 ../Middlewares/Third_Party/AL94_USB_Composite/COMPOSITE/Target/usbd_conf.h:

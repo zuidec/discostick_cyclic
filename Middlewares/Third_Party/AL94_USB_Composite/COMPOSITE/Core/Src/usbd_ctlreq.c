@@ -503,7 +503,7 @@ static void USBD_GetDescriptor(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *r
           }
 #endif
 
-#if (USBD_CLASS_USER_STRING_DESC == 1U)
+#if (USBD_CLASS_USER_STRING_DESC == 2U)
           if (pdev->pDesc->GetUserStrDescriptor != NULL)
           {
             pbuf = pdev->pDesc->GetUserStrDescriptor(pdev->dev_speed, (req->wValue), &len);

@@ -3,3 +3,6 @@ Debug/
 *.d
 *.o
 *.launch
+*.zip
+*.bin
+*.elf

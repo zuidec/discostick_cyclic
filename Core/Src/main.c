@@ -37,6 +37,7 @@
 #include "bitutils.h"
 #include "uart.h"
 #include "com_packet.h"
+#include "special_hid_conf.h"
 #include "usb_device.h"
 
 /* USER CODE END Includes */
@@ -145,6 +146,13 @@ int main(void)
   HAL_TIM_Base_Start(&htim8);
   HAL_TIM_Base_Start(&htim3);
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+  bool rs232_connected = true;
+  if(rs232_connected)	{
+	ENABLE_USBD_HID_CUSTOM2 = 1;
+  }
+  else	{
+		ENABLE_USBD_HID_CUSTOM2 = 0;
+  }
   MX_USB_DEVICE_Init();
   init_flash();
   init_cyclic_input();
@@ -194,7 +202,7 @@ int main(void)
 
 	  if(HAL_GetTick()-usb_timer >= usb_interval_ms )	{
 		  uint8_t temp_buffer[6] = {0x01, cyclic_report.buttons,cyclic_report.roll, cyclic_report.roll >> 8,cyclic_report.pitch, cyclic_report.pitch >> 8};
-		  uint8_t otherbuffer[7] = {0x02,0xDE,0xAD,0xC0,0xDE,0xDE,0xAD};
+		  uint8_t otherbuffer[7] = {0x02,cyclic_report.pitch, cyclic_report.pitch >> 8,0xC0,0xDE,0xDE,0xAD};
 		 uint8_t status =  USBD_CUSTOM_HID_SendReport(&hUsbDevice, temp_buffer, sizeof(temp_buffer));
 		 if(status == USBD_FAIL || status == USBD_BUSY)	{
 			 USBD_CUSTOM_HID_SendReport(&hUsbDevice, temp_buffer, sizeof(temp_buffer));

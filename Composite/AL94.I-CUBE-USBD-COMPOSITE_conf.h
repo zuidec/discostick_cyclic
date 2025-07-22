@@ -53,6 +53,7 @@
 
 /*---------- _USBD_USE_HID_CUSTOM  -----------*/
 #define _USBD_USE_HID_CUSTOM      1
+
 #define _USBD_USE_HID_CUSTOM2     1
 //#define _USBD_USE_HID_CUSTOM3     1
 
