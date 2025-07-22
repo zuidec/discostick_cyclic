@@ -1,3 +1,4 @@
+.settings
 *.d
 *.o
 *.cyclo
