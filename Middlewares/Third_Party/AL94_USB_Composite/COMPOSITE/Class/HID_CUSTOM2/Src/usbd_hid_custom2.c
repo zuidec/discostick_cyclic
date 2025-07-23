@@ -312,6 +312,8 @@ __ALIGN_BEGIN static uint8_t USBD_CUSTOM_HID2_OtherSpeedCfgDesc[USB_CUSTOM_HID2_
                                  /* 41 */
 };
 
+__ALIGN_BEGIN static uint8_t USBD_EMPTY_Cfg[1] __ALIGN_END = {0x00};
+
 /* USB CUSTOM_HID device Configuration Descriptor */
 __ALIGN_BEGIN static uint8_t USBD_CUSTOM_HID2_Desc[USB_CUSTOM_HID2_DESC_SIZ] __ALIGN_END =
     {
@@ -613,7 +615,6 @@ uint8_t USBD_CUSTOM_HID2_SendReport(USBD_HandleTypeDef *pdev,
 static uint8_t *USBD_CUSTOM_HID2_GetFSCfgDesc(uint16_t *length)
 {
   *length = (uint16_t)sizeof(USBD_CUSTOM_HID2_CfgFSDesc);
-
   return USBD_CUSTOM_HID2_CfgFSDesc;
 }
 
