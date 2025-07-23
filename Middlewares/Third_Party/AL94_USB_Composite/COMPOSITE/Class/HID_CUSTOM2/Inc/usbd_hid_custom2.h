@@ -47,8 +47,8 @@ extern "C" {
 #define CUSTOM_HID2_EPIN_SIZE                         0x40U
 #define CUSTOM_HID2_EPOUT_SIZE                        0x40U
 
-#define USB_CUSTOM_HID2_CONFIG_DESC_SIZ               41U
 #define USB_CUSTOM_HID2_DESC_SIZ                      9U
+#define USB_CUSTOM_HID2_CONFIG_DESC_SIZ               41U
 
 #ifndef CUSTOM_HID2_HS_BINTERVAL
 #define CUSTOM_HID2_HS_BINTERVAL                      0x05U
@@ -77,6 +77,7 @@ extern "C" {
 
 #define CUSTOM_HID2_REQ_SET_REPORT                    0x09U
 #define CUSTOM_HID2_REQ_GET_REPORT                    0x01U
+
 /**
   * @}
   */

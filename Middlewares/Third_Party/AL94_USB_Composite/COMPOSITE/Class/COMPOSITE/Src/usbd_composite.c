@@ -38,7 +38,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_composite.h"
 #include "usbd_ctlreq.h"
-
+#include "special_hid_conf.h"
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */
@@ -58,7 +58,7 @@
 /** @defgroup USBD_COMPOSITE_Private_Defines
   * @{
   */
-
+#define USBD_COMPOSITE_CFG_DESC_MAX  256U
 /**
   * @}
   */
@@ -163,9 +163,16 @@ typedef struct USBD_COMPOSITE_CFG_DESC_t
 
 } __PACKED USBD_COMPOSITE_CFG_DESC_t;
 
+typedef struct USBD_COMPOSITE_DYN_CFG_DESC_t    {
+    uint16_t length;
+    uint8_t CfgDesc[USBD_COMPOSITE_CFG_DESC_MAX];
+} __PACKED USBD_COMPOSITE_DYN_CFG_DESC_t ;
+
+
 #if defined(__ICCARM__) /*!< IAR Compiler */
 #pragma data_alignment = 4
 #endif
+__ALIGN_BEGIN USBD_COMPOSITE_DYN_CFG_DESC_t USBD_COMPOSITE_DYN_CFG_DESC __ALIGN_END;
 __ALIGN_BEGIN USBD_COMPOSITE_CFG_DESC_t USBD_COMPOSITE_FSCfgDesc, USBD_COMPOSITE_HSCfgDesc __ALIGN_END;
 uint8_t USBD_Track_String_Index = (USBD_IDX_INTERFACE_STR + 1);
 
@@ -784,8 +791,12 @@ static uint8_t *USBD_COMPOSITE_GetHSCfgDesc(uint16_t *length)
   */
 static uint8_t *USBD_COMPOSITE_GetFSCfgDesc(uint16_t *length)
 {
+   *length = USBD_COMPOSITE_DYN_CFG_DESC.length;
+   return (uint8_t *)&USBD_COMPOSITE_DYN_CFG_DESC.CfgDesc;
+/*
   *length = (uint16_t)sizeof(USBD_COMPOSITE_FSCfgDesc);
   return (uint8_t *)&USBD_COMPOSITE_FSCfgDesc;
+  */
 }
 
 /**
@@ -1033,18 +1044,20 @@ void USBD_COMPOSITE_Mount_Class(void)
 #endif
 
 #if (USBD_USE_HID_CUSTOM2 == 1)
-  ptr = USBD_HID_CUSTOM2.GetFSConfigDescriptor(&len);
-  USBD_Update_HID2_Custom_DESC(ptr, interface_no_track, in_ep_track, out_ep_track, USBD_Track_String_Index);
-  memcpy(USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM2_DESC, ptr + 0x09, len - 0x09);
+  if(ENABLE_USBD_HID_CUSTOM2)   {
+      ptr = USBD_HID_CUSTOM2.GetFSConfigDescriptor(&len);
+      USBD_Update_HID2_Custom_DESC(ptr, interface_no_track, in_ep_track, out_ep_track, USBD_Track_String_Index);
+      memcpy(USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM2_DESC, ptr + 0x09, len - 0x09);
 
-  ptr = USBD_HID_CUSTOM2.GetHSConfigDescriptor(&len);
-  USBD_Update_HID2_Custom_DESC(ptr, interface_no_track, in_ep_track, out_ep_track, USBD_Track_String_Index);
-  memcpy(USBD_COMPOSITE_HSCfgDesc.USBD_HID_CUSTOM2_DESC, ptr + 0x09, len - 0x09);
+      ptr = USBD_HID_CUSTOM2.GetHSConfigDescriptor(&len);
+      USBD_Update_HID2_Custom_DESC(ptr, interface_no_track, in_ep_track, out_ep_track, USBD_Track_String_Index);
+      memcpy(USBD_COMPOSITE_HSCfgDesc.USBD_HID_CUSTOM2_DESC, ptr + 0x09, len - 0x09);
 
-  in_ep_track += 1;
-  out_ep_track += 1;
-  interface_no_track += 1;
-  USBD_Track_String_Index += 1;
+      in_ep_track += 1;
+      out_ep_track += 1;
+      interface_no_track += 1;
+      USBD_Track_String_Index += 1;
+  }
 #endif
 #if (USBD_USE_UAC_MIC == 1)
   ptr = USBD_AUDIO_MIC.GetFSConfigDescriptor(&len);
@@ -1198,6 +1211,24 @@ void USBD_COMPOSITE_Mount_Class(void)
   ptr[7] = 0x80; /* bmAttributes: Bus Powered according to user configuration */
 #endif
   ptr[8] = USBD_MAX_POWER; /* MaxPower 100 mA */
+
+    uint8_t *p = USBD_COMPOSITE_DYN_CFG_DESC.CfgDesc;
+
+    memcpy(p, USBD_COMPOSITE_FSCfgDesc.CONFIG_DESC, sizeof(USBD_COMPOSITE_FSCfgDesc.CONFIG_DESC));
+    p += sizeof(USBD_COMPOSITE_FSCfgDesc.CONFIG_DESC);
+
+    memcpy(p, USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM_DESC, sizeof(USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM_DESC));
+    p += sizeof(USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM_DESC);
+
+    if (ENABLE_USBD_HID_CUSTOM2) {
+        memcpy(p, USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM2_DESC, sizeof(USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM2_DESC));
+        p += sizeof(USBD_COMPOSITE_FSCfgDesc.USBD_HID_CUSTOM2_DESC);
+    }
+
+    // Patch wTotalLength
+    USBD_COMPOSITE_DYN_CFG_DESC.length =  p - USBD_COMPOSITE_DYN_CFG_DESC.CfgDesc;
+    USBD_COMPOSITE_DYN_CFG_DESC.CfgDesc[2] = LOBYTE(USBD_COMPOSITE_DYN_CFG_DESC.length);
+    USBD_COMPOSITE_DYN_CFG_DESC.CfgDesc[3] = HIBYTE(USBD_COMPOSITE_DYN_CFG_DESC.length);
 
   (void)out_ep_track;
   (void)in_ep_track;
